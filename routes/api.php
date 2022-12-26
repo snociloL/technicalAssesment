@@ -1,11 +1,12 @@
 <?php
-
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
 | API Routes
+|
 |--------------------------------------------------------------------------
 |
 | Here is where you can register API routes for your application. These
@@ -14,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/products', function(){
-    return 'products';
+Route::get('/students', function(){
+    return Student::all();
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
