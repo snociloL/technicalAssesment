@@ -15,11 +15,25 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::resource('students', StudentController::class);
 
-// Route::get('/students', [StudentController::class, 'index']);
-// Route::post('/students', [StudentController::class, 'store']);
+//Public Routes
+        Route::resource('students', StudentController::class);
+        //Route::get('/students/search/{name}', [StudentController::class, 'search']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+        //Route::get('/students/search/{email}', [StudentController::class, 'search']);
+
+        // Route::get('/students', [StudentController::class, 'index']);
+
+
+        // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+        //     return $request->user();
+        // });
+
+
+// Protected Routes
+        Route::group(['middleware' => ['auth:sanctum']], function() {
+            Route::get('/students/search/{name}', [StudentController::class, 'search']);
+            Route::post('/students', [StudentController::class, 'store']);
+            Route::put('/students/{id}', [StudentController::class, 'update']);
+            Route::delete('/students/{id}', [StudentController::class, 'destroy']);
+        });
