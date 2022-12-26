@@ -19,6 +19,15 @@ Route::get('/students', function(){
     return Student::all();
 });
 
+Route::post('/students', function(){
+    return Student::create([
+        'name' => 'Deep',
+        'email' => 'cunny@cute&funny.com',
+        'address' => 'Cunny Lake, MY',
+        'studyCourse' => 'CS110'
+    ]);
+});
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
